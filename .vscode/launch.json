@@ -1,0 +1,41 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Start Hardhat Node",
+      "program": "${workspaceFolder}/node_modules/hardhat/internal/cli/cli.js",
+      "args": ["node"],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug deploy.ts with Hardhat",
+      "program": "${workspaceFolder}/node_modules/hardhat/internal/cli/cli.js",
+      "args": ["run", "scripts/deploy.ts", "--network", "localhost"],
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "wait-for-node"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug interact.ts with Hardhat",
+      "program": "${workspaceFolder}/node_modules/hardhat/internal/cli/cli.js",
+      "args": ["run", "scripts/interact.ts", "--network", "localhost"],
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "wait-for-node"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "🚀 Start Node & Debug Deploy",
+      "configurations": [
+        "Start Hardhat Node",
+        "Debug deploy.ts with Hardhat"
+      ],
+      "stopAll": true
+    }
+  ]
+}
