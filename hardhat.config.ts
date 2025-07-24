@@ -13,8 +13,11 @@ const config: HardhatUserConfig = {
       url: "http://127.0.0.1:8545",
     },
     sepolia: {
-      url: `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`,
+      url: `${process.env.ALCHEMY_API_URL}${process.env.ALCHEMY_API_KEY}`,
       accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+            timeout: 60000,
+      gas: "auto",
+      gasPrice: "auto",
     },
   },
   paths: {
@@ -29,6 +32,10 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
+  },
+    // Add this to prevent Hardhat from trying to use unsupported methods
+  mocha: {
+    timeout: 60000
   },
 };
 

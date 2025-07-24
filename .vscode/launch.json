@@ -21,11 +21,27 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Deploy Sepolia - deploy.ts with Hardhat",
+      "program": "${workspaceFolder}/node_modules/hardhat/internal/cli/cli.js",
+      "args": ["run", "scripts/deploy.ts", "--network", "sepolia"],
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "wait-for-node"
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Debug interact.ts with Hardhat",
       "program": "${workspaceFolder}/node_modules/hardhat/internal/cli/cli.js",
       "args": ["run", "scripts/interact.ts", "--network", "localhost"],
-      "cwd": "${workspaceFolder}",
-      "preLaunchTask": "wait-for-node"
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Sepolia - interact.ts with Hardhat",
+      "program": "${workspaceFolder}/node_modules/hardhat/internal/cli/cli.js",
+      "args": ["run", "scripts/interact.ts", "--network", "sepolia"],
+      "cwd": "${workspaceFolder}"
     }
   ],
   "compounds": [
@@ -34,6 +50,22 @@
       "configurations": [
         "Start Hardhat Node",
         "Debug deploy.ts with Hardhat"
+      ],
+      "stopAll": true
+    },
+     {
+      "name": "Sepolia Deploy - Start Node & Debug Deploy",
+      "configurations": [
+        "Start Hardhat Node",
+        "Deploy Sepolia - deploy.ts with Hardhat"
+      ],
+      "stopAll": true
+    },
+    {
+      "name": "Sepolia Interact - Start Node & Debug Interact",
+      "configurations": [
+        "Start Hardhat Node",
+        "Sepolia - interact.ts with Hardhat"
       ],
       "stopAll": true
     }
