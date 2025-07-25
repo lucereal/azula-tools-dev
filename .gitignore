@@ -137,3 +137,36 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Hardhat specific
+cache/
+artifacts/
+typechain-types/
+
+# Environment variables (already covered but making sure)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE files
+.vscode/settings.json
+.idea/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Deployment artifacts
+deployments/
+contracts/flattened/
+
+# Coverage reports
+coverage/
+coverage.json

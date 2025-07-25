@@ -4,7 +4,15 @@ import "@typechain/hardhat";
 import "dotenv/config";
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.24",
+    solidity: {
+    version: "0.8.24",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200,
+      },
+    },
+  },
   networks: {
     hardhat: {
       // Built-in network for testing
@@ -37,6 +45,7 @@ const config: HardhatUserConfig = {
   mocha: {
     timeout: 60000
   },
+  
 };
 
 export default config;
