@@ -12,41 +12,42 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug deploy.ts with Hardhat",
+      "name": "🚀 Run Script (Interactive)",
       "program": "${workspaceFolder}/node_modules/hardhat/internal/cli/cli.js",
-      "args": ["run", "scripts/deploy.ts", "--network", "localhost"],
+      "args": ["run", "${input:scriptFile}", "--network", "${input:network}"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "📦 Deploy to Localhost",
+      "program": "${workspaceFolder}/node_modules/hardhat/internal/cli/cli.js",
+      "args": ["run", "${input:deployScript}", "--network", "localhost"],
       "cwd": "${workspaceFolder}",
       "preLaunchTask": "wait-for-node"
     },
     {
       "type": "node",
       "request": "launch",
-      "name": "Deploy Sepolia - deploy.ts with Hardhat",
+      "name": "🌐 Deploy to Sepolia",
       "program": "${workspaceFolder}/node_modules/hardhat/internal/cli/cli.js",
-      "args": ["run", "scripts/deploy.ts", "--network", "sepolia"],
+      "args": ["run", "${input:deployScript}", "--network", "sepolia"],
       "cwd": "${workspaceFolder}",
-      "preLaunchTask": "wait-for-node"
+      "console": "integratedTerminal"
     },
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug interact.ts with Hardhat",
+      "name": "🔧 Interact Script",
       "program": "${workspaceFolder}/node_modules/hardhat/internal/cli/cli.js",
-      "args": ["run", "scripts/interact.ts", "--network", "localhost"],
+      "args": ["run", "${input:interactScript}", "--network", "${input:network}"],
       "cwd": "${workspaceFolder}"
     },
     {
       "type": "node",
       "request": "launch",
-      "name": "Sepolia - interact.ts with Hardhat",
-      "program": "${workspaceFolder}/node_modules/hardhat/internal/cli/cli.js",
-      "args": ["run", "scripts/interact.ts", "--network", "sepolia"],
-      "cwd": "${workspaceFolder}"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Debug All Tests",
+      "name": "🧪 Debug All Tests",
       "program": "${workspaceFolder}/node_modules/hardhat/internal/cli/cli.js",
       "args": ["test"],
       "cwd": "${workspaceFolder}",
@@ -55,23 +56,51 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug Specific Test File",
+      "name": "🎯 Debug Specific Test",
       "program": "${workspaceFolder}/node_modules/hardhat/internal/cli/cli.js",
       "args": ["test", "${input:testFile}"],
-      "cwd": "${workspaceFolder}",
-      "console": "integratedTerminal"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Debug AccessContract Tests",
-      "program": "${workspaceFolder}/node_modules/hardhat/internal/cli/cli.js",
-      "args": ["test", "test/accessContract.test.ts"],
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal"
     }
   ],
   "inputs": [
+    {
+      "id": "scriptFile",
+      "description": "Enter the script file path",
+      "default": "scripts/",
+      "type": "promptString"
+    },
+    {
+      "id": "deployScript",
+      "description": "Select deployment script",
+      "default": "scripts/deploy.ts",
+      "type": "pickString",
+      "options": [
+        "scripts/deploy.ts",
+        "scripts/deployAccessContract.ts"
+      ]
+    },
+    {
+      "id": "interactScript",
+      "description": "Select interaction script",
+      "default": "scripts/interact.ts",
+      "type": "pickString",
+      "options": [
+        "scripts/interact.ts",
+        "scripts/interactAccessContract.ts"
+      ]
+    },
+    {
+      "id": "network",
+      "description": "Select network",
+      "default": "localhost",
+      "type": "pickString",
+      "options": [
+        "localhost",
+        "sepolia",
+        "hardhat"
+      ]
+    },
     {
       "id": "testFile",
       "description": "Enter the test file path (e.g., test/accessContract.test.ts)",
@@ -81,26 +110,17 @@
   ],
   "compounds": [
     {
-      "name": "🚀 Start Node & Debug Deploy",
+      "name": "🚀 Start Node & Deploy to Localhost",
       "configurations": [
         "Start Hardhat Node",
-        "Debug deploy.ts with Hardhat"
-      ],
-      "stopAll": true
-    },
-     {
-      "name": "Sepolia Deploy - Start Node & Debug Deploy",
-      "configurations": [
-        "Start Hardhat Node",
-        "Deploy Sepolia - deploy.ts with Hardhat"
+        "📦 Deploy to Localhost"
       ],
       "stopAll": true
     },
     {
-      "name": "Sepolia Interact - Start Node & Debug Interact",
+      "name": "🌐 Deploy to Sepolia",
       "configurations": [
-        "Start Hardhat Node",
-        "Sepolia - interact.ts with Hardhat"
+        "🌐 Deploy to Sepolia"
       ],
       "stopAll": true
     }

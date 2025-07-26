@@ -19,6 +19,12 @@ const config: HardhatUserConfig = {
     },
     localhost: {
       url: "http://127.0.0.1:8545",
+      timeout: 120000, // 2 minutes
+      httpHeaders: {},
+      gas: "auto",
+      gasPrice: "auto",
+      gasMultiplier: 1.2,
+      accounts: "remote", // Use accounts from the running node
     },
     sepolia: {
       url: `${process.env.ALCHEMY_API_URL}${process.env.ALCHEMY_API_KEY}`,
